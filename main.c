@@ -10,7 +10,7 @@ struct person
   char tel[13];
   char vendlindja[60];
   char email[30];
-  int mosha[10];
+  char mosha[10];
   char gjinia[3];
 } v[200],temp;
 
@@ -30,6 +30,7 @@ void menu()
   printf("\n s - Save ");
   printf("\n p - Paraqit ");
   printf("\n r - Rendit ");
+  printf("\n t - Statistika ");
   printf("\n d - Dalja");
   printf("\n-----------------------------");
   printf("\n Zgjedhja : ");
@@ -79,13 +80,13 @@ void dislay()
 {
     system("cls");
  printf("\n\n  Lista e personave ");
- printf("\n=====================================");
- printf("\n   Emri     Mbiemri      Mosha     Gjinia     Nr tel    Vendlindja");
- printf("\n-------------------------------------");
+ printf("\n===========================================================================");
+ printf("\n        Emri      Mbiemri      Mosha     Gjinia     Nr tel        Vendlindja|");
+ printf("\n---------------------------------------------------------------------------");
  int i;
  for(i=0;i<nr; i++)
  {
-  printf("\n%10s %10s %10s %10s %10s %10s",v[i].emri,v[i].mbiemri,v[i].mosha,v[i].gjinia,v[i].tel,v[i].vendlindja);
+  printf("\n  %10s  %10s %9s %8s %18s \t%8s",v[i].emri,v[i].mbiemri,v[i].mosha,v[i].gjinia,v[i].tel,v[i].vendlindja);
  }
  printf("\n\n");
 }
@@ -151,10 +152,14 @@ void modifiko()
      scanf("%s",v[i].mbiemri);
      printf("Tel :");
      scanf("%s",v[i].tel);
-     printf("Adresa :");
+     printf("Vendlindja :");
      scanf("%s",v[i].vendlindja);
      printf("Email :");
      scanf("%s",v[i].email);
+     printf("Mosha :");
+     scanf("%s",v[i].mosha);
+     printf("Gjinia :");
+     scanf("%s",v[i].gjinia);
      break;
   }
  }
@@ -192,7 +197,7 @@ void operatorTel()
     eagle++;
     if(v[i].tel[2]=='6')
     plusi++;
-    if(v[i].tel[1]=='6')
+    if(v[i].tel[1]!='6')
     fiks++;
     }
     printf("%d persona perdorin operatorin Vodafone\n",vdf);
@@ -206,19 +211,29 @@ void operatorTel()
 void mosha()
 {    int i,mosha1=0;
 for(i=0;i<nr;i++)
-    {if (v[i].mosha[0]=='1'&&v[i].mosha[1]>8)
+    {if (v[i].mosha[0]=='1'&&v[i].mosha[1]>'8')
     mosha1++;
 
      }
-printf("\n Ne rregjister ndodhen %d persona mbi 18 vjec",mosha1);
+printf("\n Ne regjister ndodhen %d persona mbi 18 vjec",mosha1);
+
+}
+void gjatEmrit()
+{
+    int gjjat=0;
+    for(int i=0;i<nr;i++)
+        if(strlen(v[i].emri)>5)
+        gjjat++;
+    printf("\n\n%d persona e kane emrin me me me shume se 5 karaktere\n");
 
 }
 void statistika()
 {
     system("cls");
-    printf("\nNe regjister ndodhen te rregjistruar: %d persona\n",nr);
+    printf("\nNe regjister ndodhen te rregjistruar: %d persona\n\n",nr);
     operatorTel();
     mosha();
+    gjatEmrit();
 
 }
 void emriT()
@@ -240,13 +255,13 @@ void emriT()
 	}}}}}
 
   system("cls");
- printf("\n\n  Lista e personave ");
- printf("\n=====================================");
- printf("\n   Emri       Mbiemri      Nr tel");
- printf("\n-------------------------------------");
+  printf("\n\n  Lista e personave ");
+ printf("\n===========================================================================");
+ printf("\n    Emri        Mbiemri      Mosha     Gjinia     Nr tel        Vendlindja |");
+ printf("\n---------------------------------------------------------------------------");
  for(i=0;i<nr; i++)
  {
-  printf("\n%10s %10s %10s",v[i].emri,v[i].mbiemri,v[i].tel);
+  printf("\n%10s %10s %9s %8s %19s \t%s",v[i].emri,v[i].mbiemri,v[i].mosha,v[i].gjinia,v[i].tel,v[i].vendlindja);
  }
  printf("\n\n");
 
@@ -291,4 +306,3 @@ main()
  }while (k!='d' && k!='D' && k!=27);
 
 }
-
